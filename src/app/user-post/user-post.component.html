@@ -1,0 +1,47 @@
+<p style="margin-bottom: 15px;">Admin relation users number: {{userCount}}</p>
+<button type="button" class="btn btn-danger" (click)="logout()">Logout</button>
+<div class="row">
+  <div class="col-12">
+    <table class="table">
+      <thead>
+      <th>Image</th>
+      <th>Title</th>
+      <th>Explanation</th>
+      <th></th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let post of posts">
+        <td><img [src]="transform(post.imageString)" width="50" height="75"></td>
+        <td>{{post.title}}</td>
+        <td>{{post.explanation}}</td>
+        <td><button type="button" class="btn btn-primary" (click)="deletePost(post.id)">Delete</button> </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-12">
+    <form name="postform" #f="ngForm" (submit)="savePost()">
+      <div class="form-group">
+        <label>Title:</label>
+        <input type="text" class="form-control" id="email" name="title" placeholder="Enter title"  [(ngModel)]="postModel.title">
+      </div>
+      <div class="form-group">
+        <label>Explanation:</label>
+        <input type="text" class="form-control" id="pwd" name="explanation" placeholder="Enter explanation"  [(ngModel)]="postModel.explanation">
+      </div>
+      <div class="form-group">
+        <input type="file" (change)="onFileChanged($event)" accept=".png, .jpg, .jpeg">
+        <img [src]="imgUrl" height="200" *ngIf="imgUrl">
+      </div>
+      <div class="form-group">
+        <button type="submit" (click)="savePost()" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
